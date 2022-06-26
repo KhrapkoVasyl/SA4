@@ -1,5 +1,7 @@
 print hello
-print world
-reverse hello2
-reverse Oleh
-print someString
+print hello2
+reverse world
+reverse world2
+print before
+reverse check
+reverse someString

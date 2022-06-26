@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"log"
 	"os"
 
 	"github.com/KhrapkoVasyl/SA4/engine"
@@ -19,9 +20,17 @@ func main() {
 		for scanner.Scan() {
 			commandLine := scanner.Text()
 			cmd := engine.Parse(commandLine) // parse the line to get a Command
-			eventLoop.Post(cmd)
+			postErr := eventLoop.Post(cmd)
+			if postErr != nil {
+				log.Fatalf("Post error: %s", postErr)
+			}
 		}
 	}
 
 	eventLoop.AwaitFinish()
+	err := eventLoop.Post(engine.PrintCommand("error command"))
+	if err != nil {
+		log.Fatalf("Post error: %s", err)
+	}
+
 }
