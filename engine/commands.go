@@ -29,3 +29,9 @@ func reverseStr(str string) string {
 
 	return string(runeSlice)
 }
+
+type StopCommand struct{}
+
+func (sc StopCommand) Execute(h Handler) {
+	h.(*EventLoop).stop = true
+}
