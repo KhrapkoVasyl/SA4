@@ -5,20 +5,20 @@ type Handler interface {
 }
 
 type EventLoop struct {
-	eq         *EventsQueue
-	shoudlStop bool
+	eq         *EventQueue
+	shouldStop bool
 	stopSignal chan struct{}
 }
 
 func (loop *EventLoop) Start() {
-	loop.eq = &EventsQueue{
+	loop.eq = &EventQueue{
 		notEmpty: make(chan struct{}),
 	}
 
 	loop.stopSignal = make(chan struct{})
 
 	go func() {
-		for !loop.shoudlStop || !loop.eq.isEmpty() {
+		for !loop.shouldStop || !loop.eq.empty() {
 			cmd := loop.eq.pull()
 			cmd.Execute(loop)
 		}
@@ -28,10 +28,10 @@ func (loop *EventLoop) Start() {
 }
 
 func (loop *EventLoop) Post(cmd Command) {
-	// l.eq.push(cmd)
+	loop.eq.push(cmd)
 }
 
 func (loop *EventLoop) AwaitFinish() {
-	loop.Post(stopCommand{})
+	loop.Post(StopCommand{})
 	<-loop.stopSignal
 }

@@ -33,5 +33,5 @@ func reverseStr(str string) string {
 type StopCommand struct{}
 
 func (sc StopCommand) Execute(h Handler) {
-	h.(*EventLoop).stop = true
+	h.(*EventLoop).shouldStop = true
 }
