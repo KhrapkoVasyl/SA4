@@ -16,6 +16,7 @@ func (eq *EventQueue) push(c Command) {
 	eq.commands = append(eq.commands, c)
 
 	if eq.isWaiting {
+		eq.isWaiting = false
 		eq.notEmpty <- struct{}{}
 	}
 }
@@ -29,7 +30,6 @@ func (eq *EventQueue) pull() Command {
 		eq.mu.Unlock()
 		<-eq.notEmpty
 		eq.mu.Lock()
-		// eq.isWaiting = false
 	}
 
 	res := eq.commands[0]
