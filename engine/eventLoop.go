@@ -28,7 +28,7 @@ func (loop *EventLoop) Start() {
 }
 
 func (loop *EventLoop) Post(cmd Command) {
-	// l.q.push(cmd)
+	// l.eq.push(cmd)
 }
 
 type stopCommand struct{}
