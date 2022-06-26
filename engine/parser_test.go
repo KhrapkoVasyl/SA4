@@ -8,7 +8,7 @@ import (
 )
 
 func TestParse(t *testing.T) {
-	var result PrintCommand
+	var result Command
 	assert := assert.New(t)
 
 	result = Parse("print hello")
@@ -61,7 +61,7 @@ func TestParse(t *testing.T) {
 }
 
 func ExampleParse() {
-	result = Parse("reverse hello")
+	result := Parse("reverse hello")
 	fmt.Println(result)
 	// result: ReverseCommand("hello")
 }
