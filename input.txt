@@ -1,0 +1,5 @@
+print hello
+print world
+reverse hello2
+reverse Oleh
+print someString
