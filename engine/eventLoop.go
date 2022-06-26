@@ -31,12 +31,6 @@ func (loop *EventLoop) Post(cmd Command) {
 	// l.eq.push(cmd)
 }
 
-type stopCommand struct{}
-
-func (scmd stopCommand) Execute(h Handler) {
-	h.(*EventLoop).shoudlStop = true
-}
-
 func (loop *EventLoop) AwaitFinish() {
 	loop.Post(stopCommand{})
 	<-loop.stopSignal
