@@ -62,6 +62,7 @@ func TestParse(t *testing.T) {
 
 func ExampleParse() {
 	result := Parse("reverse hello")
+	// result = ReverseCommand("hello")
 	fmt.Println(result)
-	// result: ReverseCommand("hello")
+	// output: hello
 }

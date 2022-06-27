@@ -28,6 +28,8 @@ func main() {
 	}
 
 	eventLoop.AwaitFinish()
+
+	// Throws an error when trying to call a Post() method after the finish of the EventLoop
 	err := eventLoop.Post(engine.PrintCommand("error command"))
 	if err != nil {
 		log.Fatalf("Post error: %s", err)
